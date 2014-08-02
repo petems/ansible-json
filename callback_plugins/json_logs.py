@@ -7,10 +7,8 @@ from json import JSONEncoder
 def json_log(res, host):
   if type(res) == type(dict()):
     if 'verbose_override' not in res:
-      host_json = JSONEncoder().encode({'host':host})
-      result_json = JSONEncoder().encode(res)
-      combined_json = host_json + result_json
-      combined_json = combined_json.replace("}{", ',')
+      res.update({"host": host})
+      combined_json  = JSONEncoder().encode(res)
       print(combined_json)
 
 class CallbackModule(object):
