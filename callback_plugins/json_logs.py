@@ -15,7 +15,7 @@ def json_log(res, host):
   if type(res) == type(dict()):
     if 'verbose_override' not in res:
       res.update({"host": host})
-      combined_json  = JSONEncoder().encode(res)
+      combined_json = JSONEncoder().encode(res)
       print(combined_json)
       filename = ("/var/log/ansible/hosts/json/"+host+datenow+".json")
       path = os.path.join(filename)
