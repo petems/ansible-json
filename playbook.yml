@@ -1,5 +1,7 @@
 ---
 - hosts: all
+  vars:
+    json_log: true
   tasks:
     - name: say hello world!
       command: echo 'Hello World'
