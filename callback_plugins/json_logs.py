@@ -2,7 +2,14 @@
 import os
 import time
 import json
+from datetime import datetime
 from json import JSONEncoder
+
+datenow = datetime.now()
+datenow = datenow.strftime('%Y-%m-%d-%T')
+
+if not os.path.exists("/var/log/ansible/hosts/json"):
+    os.makedirs("/var/log/ansible/hosts/json")
 
 def json_log(res, host):
   if type(res) == type(dict()):
@@ -10,6 +17,11 @@ def json_log(res, host):
       res.update({"host": host})
       combined_json  = JSONEncoder().encode(res)
       print(combined_json)
+      filename = ("/var/log/ansible/hosts/json/"+host+datenow+".json")
+      path = os.path.join(filename)
+      fd = open(path, "a")
+      fd.write(combined_json)
+      fd.close()
 
 class CallbackModule(object):
 
